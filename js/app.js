@@ -16,19 +16,29 @@ const loadData = () => {
 // display search results
 const displayPhones = (phones) => {
   const resultContainer = document.getElementById("result-container");
-  const error = document.getElementById('error');
+  const error = document.getElementById("error");
   resultContainer.innerHTML = "";
-  console.log(phones);
+
+  // where the details will be shown
+  const searchDetails = document.getElementById("search-details");
+  // clear previous single details // when details is visible and you search for phone
+  searchDetails.innerHTML = "";
+
   if (phones.length === 0) {
+    // display error
     error.innerHTML = `
       <p class="fs-3 fw-bold text-danger text-center">Sorry!No Device Found 😪</p>
     `;
-  }
-  else {
-    error.innerHTML = "" ;
-    phones.forEach((phone) => {
-      const div = document.createElement("div");
-      div.innerHTML = `
+  } else {
+    // clear error before showing result
+    error.innerHTML = "";
+
+    // control search results
+    const mobiles = (phones, start, end) => {
+      const mobiles = phones.slice(start, end);
+      mobiles.forEach((phone) => {
+        const div = document.createElement("div");
+        div.innerHTML = `
         <div class="card h-100">
             <img src="${phone.image}" class="card-img-top h-75 w-50 p-2 mx-auto" alt="image">
             <div class="card-body">
@@ -38,14 +48,22 @@ const displayPhones = (phones) => {
             </div>
         </div>
       `;
-      resultContainer.appendChild(div);
-    });
+        resultContainer.appendChild(div);
+      });
+    };
+
+    // control search result
+    mobiles(phones, 0, 20);
+
+    /* const showMore = document.getElementById("show-more");
+    showMore.innerHTML = `
+      <button onclick="mobiles('${phones}')" class="btn btn-secondary">Show more</button>
+    `; */
   }
 };
 
 // hit single phone details API // load data
 const loadSinglePhoneDetails = (slug) => {
-  //   console.log(slug);
   url = `
         https://openapi.programming-hero.com/api/phone/${slug}
     `;
@@ -60,6 +78,7 @@ const displaySinglePhoneDetails = (singlePhone) => {
   const searchDetails = document.getElementById("search-details");
   // clear previous single details
   searchDetails.innerHTML = "";
+
   // release date // conditional
   const releaseDate = singlePhone.releaseDate;
   let setReleaseDate = "";
@@ -68,8 +87,10 @@ const displaySinglePhoneDetails = (singlePhone) => {
   } else {
     setReleaseDate = "Sorry! No Date Found 😓";
   }
+
   // mainfeatures
   const phoneFeatures = singlePhone.mainFeatures;
+
   // details showing card
   const div = document.createElement("div");
   div.innerHTML = `
@@ -89,10 +110,10 @@ const displaySinglePhoneDetails = (singlePhone) => {
               <div>
                 <h6>Main Features</h6>
                 <div class="small-text text-muted">
-                  <span>${phoneFeatures.storage}</span>
-                  <span>${phoneFeatures.displaySize}</span>
-                  <span>${phoneFeatures.chipSet}</span>
-                  <span>${phoneFeatures.memory}</span>
+                  <span>Storage: ${phoneFeatures.storage} | </span>
+                  <span>DisplaySize: ${phoneFeatures.displaySize} | </span>
+                  <span>ChipSet: ${phoneFeatures.chipSet} | </span>
+                  <span>Memory: ${phoneFeatures.memory}</span>
                 </div>
               </div>
               <hr>
@@ -107,9 +128,11 @@ const displaySinglePhoneDetails = (singlePhone) => {
       </div>
     `;
   searchDetails.appendChild(div);
+
   // sensors
   const sensors = phoneFeatures.sensors;
   displaySensors(sensors);
+
   // others
   const others = singlePhone.others;
   displayOthers(others);
