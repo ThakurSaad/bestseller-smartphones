@@ -1,9 +1,22 @@
+/* google fonts */
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lobster&family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
+/* styles */
+.text-style {
+  font-family: "Bebas Neue", cursive;
+}
+.text-style2 {
+  font-family: "Bebas Neue", cursive;
+  font-weight: lighter;
+}
+.text-style-name {
+  font-family: "Lobster", cursive;
+}
 .small-text {
-    font-size: 13px;
-    font-weight: 600;
+  font-size: 13px;
+  font-weight: 600;
 }
 @media only screen and (min-width: 768px) {
-    .phoneDetails {
-        max-width: 450px;
-    }
+  .phoneDetails {
+    max-width: 450px;
+  }
 }

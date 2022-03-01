@@ -42,9 +42,9 @@ const displayPhones = (phones) => {
         <div class="card h-100">
             <img src="${phone.image}" class="card-img-top h-75 w-50 p-2 mx-auto" alt="image">
             <div class="card-body">
-                <h5 class="card-title">${phone.brand}</h5>
-                <h3>${phone.phone_name}</h3>
-                <button onclick="loadSinglePhoneDetails('${phone.slug}')" class="btn btn-dark">Details</button>
+                <h5 class="text-style card-title">${phone.brand}</h5>
+                <h3 class="text-style">${phone.phone_name}</h3>
+                <button onclick="loadSinglePhoneDetails('${phone.slug}')" class="text-style btn btn-dark">Details</button>
             </div>
         </div>
       `;
@@ -54,11 +54,6 @@ const displayPhones = (phones) => {
 
     // control search result
     mobiles(phones, 0, 20);
-
-    /* const showMore = document.getElementById("show-more");
-    showMore.innerHTML = `
-      <button onclick="mobiles('${phones}')" class="btn btn-secondary">Show more</button>
-    `; */
   }
 };
 
@@ -94,26 +89,26 @@ const displaySinglePhoneDetails = (singlePhone) => {
       <div class="phoneDetails card h-100 mb-2 mx-auto">
           <img src="${singlePhone.image}" class="card-img-top" alt="image">
           <div class="card-body">
-              <h5 class="card-title">${singlePhone.brand}</h5>
-              <h3>${singlePhone.name}</h3>
+              <h5 class="text-style card-title">${singlePhone.brand}</h5>
+              <h3 class="text-style-name">${singlePhone.name}</h3>
               <hr>
               <div>
-                <h6>Release Date</h6>
+                <h6 class="text-style">Release Date</h6>
                 <div class="small-text text-muted">
-                  <span>${setReleaseDate}</span>
+                  <span class="text-style2">${setReleaseDate}</span>
                 </div>
               </div>
               <hr>
               <div>
-                <h6>Main Features</h6>
+                <h6 class="text-style">Main Features</h6>
                 <div id="main-features" class="small-text text-muted"></div>
               </div>
               <hr>
               <div>
-                <h6>Sensors</h6>
+                <h6 class="text-style">Sensors</h6>
                 <div id="sensors" class="small-text text-muted"></div>
                 <hr>
-                <h6>Other Information</h6>
+                <h6 class="text-style">Other Information</h6>
                 <div id="others" class="small-text text-muted"></div>
               </div>
           </div>
@@ -143,6 +138,7 @@ const displayMainFeatures = (singlePhoneMainFeatures) => {
       continue;
     } else {
       const span = document.createElement("span");
+      span.classList.add('text-style2');
       const information = `${prop} : ${singlePhoneMainFeatures[prop]} | `;
       span.innerText = information;
       mainFeatures.appendChild(span);
@@ -156,6 +152,7 @@ const displaySensors = (singlePhoneSensors) => {
   // loop through elements to append
   for (const sensor of singlePhoneSensors) {
     const span = document.createElement("span");
+    span.classList.add('text-style2');
     const information = `${sensor} | `;
     span.innerText = information;
     sensors.appendChild(span);
@@ -172,6 +169,7 @@ const displayOthers = (singlePhoneOthers) => {
   else {
     for (const prop in singlePhoneOthers) {
       const span = document.createElement("span");
+      span.classList.add('text-style2');
       const information = `${prop} : ${singlePhoneOthers[prop]} | `;
       span.innerText = information;
       others.appendChild(span);
