@@ -16,11 +16,19 @@ const loadData = () => {
 // display search results
 const displayPhones = (phones) => {
   const resultContainer = document.getElementById("result-container");
+  const error = document.getElementById('error');
   resultContainer.innerHTML = "";
-  // console.log(phones);
-  phones.forEach((phone) => {
-    const div = document.createElement("div");
-    div.innerHTML = `
+  console.log(phones);
+  if (phones.length === 0) {
+    error.innerHTML = `
+      <p class="fs-3 fw-bold text-danger text-center">Sorry!No Device Found 😪</p>
+    `;
+  }
+  else {
+    error.innerHTML = "" ;
+    phones.forEach((phone) => {
+      const div = document.createElement("div");
+      div.innerHTML = `
         <div class="card h-100">
             <img src="${phone.image}" class="card-img-top h-75 w-50 p-2 mx-auto" alt="image">
             <div class="card-body">
@@ -30,8 +38,9 @@ const displayPhones = (phones) => {
             </div>
         </div>
       `;
-    resultContainer.appendChild(div);
-  });
+      resultContainer.appendChild(div);
+    });
+  }
 };
 
 // hit single phone details API // load data
