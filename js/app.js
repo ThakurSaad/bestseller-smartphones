@@ -163,7 +163,9 @@ const displaySensors = (singlePhoneSensors) => {
 const displayOthers = (singlePhoneOthers) => {
   const others = document.getElementById("others");
   if (singlePhoneOthers === undefined) {
-    others.innerText = "No Other Information";
+    others.innerHTML = `
+      <span class="text-style2">No Other Information</span>
+    `;
   }
   // loop through properties and values to append
   else {
