@@ -88,9 +88,6 @@ const displaySinglePhoneDetails = (singlePhone) => {
     setReleaseDate = "Sorry! No Date Found 😓";
   }
 
-  // mainfeatures
-  const phoneFeatures = singlePhone.mainFeatures;
-
   // details showing card
   const div = document.createElement("div");
   div.innerHTML = `
@@ -109,12 +106,7 @@ const displaySinglePhoneDetails = (singlePhone) => {
               <hr>
               <div>
                 <h6>Main Features</h6>
-                <div class="small-text text-muted">
-                  <span>Storage: ${phoneFeatures.storage} | </span>
-                  <span>DisplaySize: ${phoneFeatures.displaySize} | </span>
-                  <span>ChipSet: ${phoneFeatures.chipSet} | </span>
-                  <span>Memory: ${phoneFeatures.memory}</span>
-                </div>
+                <div id="main-features" class="small-text text-muted"></div>
               </div>
               <hr>
               <div>
@@ -129,6 +121,11 @@ const displaySinglePhoneDetails = (singlePhone) => {
     `;
   searchDetails.appendChild(div);
 
+  // calling funtions for details
+  // mainfeatures
+  const phoneFeatures = singlePhone.mainFeatures;
+  displayMainFeatures(phoneFeatures);
+
   // sensors
   const sensors = phoneFeatures.sensors;
   displaySensors(sensors);
@@ -138,12 +135,26 @@ const displaySinglePhoneDetails = (singlePhone) => {
   displayOthers(others);
 };
 
+// display main mainFeatures information
+const displayMainFeatures = (singlePhoneMainFeatures) => {
+  const mainFeatures = document.getElementById("main-features");
+  for (const prop in singlePhoneMainFeatures) {
+    if (prop === "sensors") {
+      continue;
+    } else {
+      const span = document.createElement("span");
+      const information = `${prop} : ${singlePhoneMainFeatures[prop]} | `;
+      span.innerText = information;
+      mainFeatures.appendChild(span);
+    }
+  }
+};
+
 // display sensors information
 const displaySensors = (singlePhoneSensors) => {
   const sensors = document.getElementById("sensors");
   // loop through elements to append
   for (const sensor of singlePhoneSensors) {
-    console.log(sensor);
     const span = document.createElement("span");
     const information = `${sensor} | `;
     span.innerText = information;
