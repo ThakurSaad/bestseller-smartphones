@@ -4,6 +4,6 @@
 }
 @media only screen and (min-width: 768px) {
     .phoneDetails {
-        max-width: 600px;
+        max-width: 450px;
     }
 }

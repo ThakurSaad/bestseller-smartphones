@@ -95,7 +95,7 @@ const displaySinglePhoneDetails = (singlePhone) => {
   const div = document.createElement("div");
   div.innerHTML = `
       <div class="phoneDetails card h-100 mb-2 mx-auto">
-          <img src="${singlePhone.image}" class="card-img-top h-100" alt="image">
+          <img src="${singlePhone.image}" class="card-img-top" alt="image">
           <div class="card-body">
               <h5 class="card-title">${singlePhone.brand}</h5>
               <h3>${singlePhone.name}</h3>
